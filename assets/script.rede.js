@@ -13,14 +13,12 @@ class Dados {
 }
 }
 
-
 //add user information 
 class ListUsers {
     constructor(){
         this.users = [];
     }
-
-    add (user) {
+        add (user) {
         this.users.push(user);
     }
 }
@@ -29,7 +27,7 @@ class ListUsers {
 const listUser = new ListUsers;
 
 //create users
-function createUsers (){
+function createUser() {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const birthdate = document.getElementById("birthdate").value;
@@ -48,55 +46,49 @@ function createUsers (){
 
     //call the function responsible for updating the items on the screen
     exibirUsersnaTela();
-
     displayRedeSocial();
+}
+
+function clearInputs () {
     clearFormFields();
 }
 
+//function show users 
+function exibirUsersnaTela (){
+    let html = "";
 
-//function valida cpf
-function valida_cpf(cpf) {
-    console.log("Passou pela funcao valida_cpf()");
+    listUser.users.forEach (user => {
+        html += `
+        <div> 
+        <p> name: ${user.name}           </p>
+        <p> email: ${user.email}         </p>
+        <p> birthdate: ${user.birthdate} </p>
+        <p> adress: ${user.address}      </p>
+        <p> phone: ${user.phone}         </p>
+        <p> cpf: ${user.cpf}             </p>
+        <p> age: ${user.age}             </p>
+        <p> sing: ${user.sign}           </p>
+        <p> client: ${user.client}       </p>
+        </div>
+    `;
+    });
+    document.getElementById(usersNameHTML).innerHTML = html;
+}
 
-    var numeros, digitos, soma, i, resultado, digitos_iguais;
-    digitos_iguais = 1;
-    if (cpf.length < 11)
-        return false;
-    for (i = 0; i < cpf.length - 1; i++)
-        if (cpf.charAt(i) != cpf.charAt(i + 1)) {
-            digitos_iguais = 0;
-            break;
-        }
-    if (!digitos_iguais) {
-        numeros = cpf.substring(0, 9);
-        digitos = cpf.substring(9);
-        soma = 0;
-        for (i = 10; i > 1; i--)
-            soma += numeros.charAt(10 - i) * i;
-        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-        if (resultado != digitos.charAt(0))
-            return false;
-        numeros = cpf.substring(0, 10);
-        soma = 0;
-        for (i = 11; i > 1; i--)
-            soma += numeros.charAt(11 - i) * i;
-        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
-        if (resultado != digitos.charAt(1))
-            return false;
-        return true;
+    function calculateAge(dateString) {
+        const today = new Date();
+        const birthdate = new;
+
+        Date (dateString);
+        let age = today.getFullYear();
+
+        const m = today.getMonth() - birthdate.getDate();
+
+        if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+            age--;
+        } 
+        return age;
     }
-    else
-        return false;
-}
+    console.log(getAge("1991/05/02"));
 
-//function formate cpf
-function formatedCPF(cpf) {
-    console.log("Passou pela funcao formatedCPF()");
-
-    let cpfArray = cpf.split("");
-    let cpfFormated = cpfArray[0] + cpfArray[1] + cpfArray[2]
-        + "." + cpfArray[3] + cpfArray[4] + cpfArray[5] + "."
-        + cpfArray[6] + cpfArray[7] + cpfArray[8] + "-" + cpfArray[9] + cpfArray[10];
-    return cpfFormated;
-}
 
