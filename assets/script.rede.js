@@ -48,6 +48,9 @@ function createUsers (){
 
     //call the function responsible for updating the items on the screen
     exibirUsersnaTela();
+
+    displayRedeSocial();
+    clearFormFields();
 }
 
 
@@ -85,6 +88,7 @@ function valida_cpf(cpf) {
     else
         return false;
 }
+
 //function formate cpf
 function formatedCPF(cpf) {
     console.log("Passou pela funcao formatedCPF()");
