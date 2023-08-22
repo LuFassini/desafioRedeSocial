@@ -27,7 +27,7 @@ class ListUsers {
 const listUser = new ListUsers;
 
 //create users
-function createUser() {
+function createUser () {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const birthdate = document.getElementById("birthdate").value;
@@ -74,21 +74,41 @@ function exibirUsersnaTela (){
     });
     document.getElementById(usersNameHTML).innerHTML = html;
 }
-
+//function calculate age for year birth
     function calculateAge(dateString) {
         const today = new Date();
-        const birthdate = new;
+        const birthdate = new
 
         Date (dateString);
         let age = today.getFullYear();
 
-        const m = today.getMonth() - birthdate.getDate();
+        const year = today.getMonth() - birthdate.getDate();
 
-        if (m < 0 || (m === 0 && today.getDate() < birthdate.getDate())) {
+        if (year < 18 || (year === 18 && today.getDate() < birthdate.getDate())) {
             age--;
         } 
         return age;
     }
-    console.log(getAge("1991/05/02"));
+
+    //function possible client
+    function possClient (){
+        if ((calculateAge) => 18 && => 31) {
+            return ("Possível Cliente");
+        } else  {
+            return ("Não Cliente");
+        }
+    }
+
+    //function validations inputs
+    function validations (){
+
+        if (nameInput && emaiInput && birthdateInput && addressInput && phoneInput && cpfInput);
+
+
+    }
+
+
+    
+    
 
 
