@@ -13,10 +13,73 @@ class Dados {
 }
 }
 
-//function isAnyInputEmpty
+//create function createUser
+function createUser() {
+   const nameInput =     document.getElementById("nameInput").value;
+   const emailInput =    document.getElementById("emailInput").value;
+   const birthdateInput  document.getElementById("birthdateInput").value;
+   const addressInput =  document.getElementById("addressInput").value;
+   const phoneInput =    document.getElementById("phoneInput").value;
+   const cpfInputf =     document.getElementById("cpfInput").value;
+    
+
+    const user = new user (nameInput,emailInput,birthdateInput,addressInput,phoneInput,cpfInputf);
+
+    const list = new list;
+    
+    ListUsers.add(user);
+    
+    exibirusers();
+}
+
+// function isAnyInputEmpty
 function isAnyInputEmpty () {
     const user = [];
     user.length;
+}
+
+//function valida cpf
+function valida_cpf(cpf) {
+    console.log("Passou pela funcao valida_cpf()");
+
+    var numeros, digitos, soma, i, resultado, digitos_iguais;
+    digitos_iguais = 1;
+    if (cpf.length < 11)
+        return false;
+    for (i = 0; i < cpf.length - 1; i++)
+        if (cpf.charAt(i) != cpf.charAt(i + 1)) {
+            digitos_iguais = 0;
+            break;
+        }
+    if (!digitos_iguais) {
+        numeros = cpf.substring(0, 9);
+        digitos = cpf.substring(9);
+        soma = 0;
+        for (i = 10; i > 1; i--)
+            soma += numeros.charAt(10 - i) * i;
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        if (resultado != digitos.charAt(0))
+            return false;
+        numeros = cpf.substring(0, 10);
+        soma = 0;
+        for (i = 11; i > 1; i--)
+            soma += numeros.charAt(11 - i) * i;
+        resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+        if (resultado != digitos.charAt(1))
+            return false;
+        return true;
+    }
+    else
+        return false;
+}
+
+//reorganize date 
+function reorganizeDate (){
+  
+}
+//function registered cpf
+function isCPFcadastrado() {
+     Boolean validacpf == true
 }
 
 //function mensage sucess
@@ -41,11 +104,10 @@ function sendErrorMsg(msg) {
     }, 4000);
 }
 
-//function ValidaCPF
-function validaCPF (){
-
-}
-
+//function clear inputs
+ function clearInputs() {
+    cleanInput();
+ }
 
 //add user list
 class ListUsers {
@@ -57,10 +119,10 @@ class ListUsers {
              sendErrorMsg ("Todos os campos obrigatórios devem ser preenchidos.");
         } else if (!validaCPF (user.cpf)){
             sendErrorMsg("CPF inválido.");
-        } else if (isCPFcadatrado(user.cpf)){
+        } else if (isCPFcadastrado(user.cpf)){
             sendErrorMsg ("CPF já cadastrado no sistema.");
         } else {
-            return.push.(user);
+            (user).push;
             sendSuccessMsg ("Parabéns, você entrou na lista de espera!");
             cleanInput();
         }
