@@ -11,7 +11,7 @@ class Dados {
 }
 
 //add user information 
-class informations {
+class Informations {
     constructor (name,email,birthdate,address,phone,cpf,age,sign,client) {
         this.name = name;
         this.email = email;
