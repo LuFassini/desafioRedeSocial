@@ -77,6 +77,23 @@ function valida_cpf(cpf) {
 function reorganizeDate (){
   
 }
+
+function calculateAge(date) {
+    const date = new date();
+   
+    const birthdate = new
+
+    Date (dateString);
+    let age = today.getFullYear();
+
+    const year = today.getFullYear();
+
+    if (year < 18 || (year === 18 && today.getFullYear() < birthdate.getFullYear())) {
+        age--;
+    } 
+    return age;
+}
+
 //function registered cpf
 function isCPFcadastrado() {
      Boolean validacpf == true
@@ -128,6 +145,17 @@ class ListUsers {
         }
     }
 }
+
+function moreinfos () {
+ class possClient {
+        if ((calculateAge) => 18 && => 31) {
+            this.calculateAge = calculateAge;
+            sendSuccessMsg ("Possível Cliente");
+        } else  {
+            sendErrorMsg ("Não Cliente");
+        }
+    }
+};
 
 
     
