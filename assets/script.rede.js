@@ -16,7 +16,7 @@ class Dados {
 //add user information 
 class ListUsers {
     constructor(){
-        this.users = [];
+        this.user = [];
     }
         add (user) {
         this.users.push(user);
@@ -99,16 +99,17 @@ function exibirUsersnaTela (){
         }
     }
 
-    //function validations inputs
-    function validations (){
+    //
 
-        if (nameInput && emaiInput && birthdateInput && addressInput && phoneInput && cpfInput == "") {
-            
-        } else {
-            return ("Todos os campos obrigatórios devem ser")
-        }
-
-
+    //function mensage error
+    function sendErrorMsg(msg) {
+        console.log("Passou pela funcao sendErrorMsg()");
+    
+        document.getElementById("error-msg").innerHTML = msg;
+        document.getElementById("error-msg").classList.remove("hidden");
+        setTimeout(function () {
+            document.getElementById("error-msg").classList.add("hidden");
+        }, 4000);
     }
 
 
