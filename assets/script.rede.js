@@ -82,9 +82,9 @@ function exibirUsersnaTela (){
         Date (dateString);
         let age = today.getFullYear();
 
-        const year = today.getMonth() - birthdate.getDate();
+        const year = today.getFullYear();
 
-        if (year < 18 || (year === 18 && today.getDate() < birthdate.getDate())) {
+        if (year < 18 || (year === 18 && today.getFullYear() < birthdate.getFullYear())) {
             age--;
         } 
         return age;
@@ -102,7 +102,11 @@ function exibirUsersnaTela (){
     //function validations inputs
     function validations (){
 
-        if (nameInput && emaiInput && birthdateInput && addressInput && phoneInput && cpfInput);
+        if (nameInput && emaiInput && birthdateInput && addressInput && phoneInput && cpfInput == "") {
+            
+        } else {
+            return ("Todos os campos obrigatórios devem ser")
+        }
 
 
     }
