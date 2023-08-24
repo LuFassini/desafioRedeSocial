@@ -1,44 +1,184 @@
-//user creation
-class Dados {
-    contructor (name,email,birthdate,address,phone,cpf) {
-    this.name = name;
-    this.email = email;
-    this.birthdate = birthdate;
-    this.address = address;
-    this.phone = phone;
-    this.cpf = cpf;
-    this.age = age;
-    this.sign = sign;
-    this.client = client;
-}
+//Class e Objects.
+
+class User {
+    constructor(name, email, birthdate, address, phone, cpf) {
+        this.name = name;
+        this.email = email;
+        this.birthdate = birthdate;
+        this.address = address;
+        this.phone = phone;
+        this.cpf = cpf;
+        this.age = this.calculateAge();
+        this.zodiacSign = this.getZodiacSign();
+        this.possibleClient = this.isPossibleClient();
+        console.log("Passou pelo constructor da class User");
+    }
+
+    calculateAge() {
+        let today = new Date();
+        let birthdate = new Date(this.birthdate);
+        let age = today.getFullYear() - birthdate.getFullYear();
+        let month = today.getMonth() - birthdate.getMonth();
+
+        if (month < 0 || (month === 0 && today.getDate() < birthdate.getDate())) {
+            age--;
+        }
+        console.log("Passou pelo calculateAge() da class User");
+        return age;
+        
+    }
+    getZodiacSign() {
+        let birthdate = new Date(this.birthdate);
+        let day = birthdate.getDate();
+        let month = birthdate.getMonth() + 1;
+        console.log("Passou pelo getSigno() da class User");
+
+        if ((month == 1 && day <= 20) || (month == 12 && day >= 22)) {
+            return "Capricórnio ♑";
+        } else if ((month == 1 && day >= 21) || (month == 2 && day <= 18)) {
+            return "Aquário ♒";
+        } else if ((month == 2 && day >= 19) || (month == 3 && day <= 20)) {
+            return "Peixes ♓";
+        } else if ((month == 3 && day >= 21) || (month == 4 && day <= 20)) {
+            return "Áries ♈";
+        } else if ((month == 4 && day >= 21) || (month == 5 && day <= 20)) {
+            return "Touro ♉";
+        } else if ((month == 5 && day >= 21) || (month == 6 && day <= 20)) {
+            return "Gêmeos ♊";
+        } else if ((month == 6 && day >= 22) || (month == 7 && day <= 22)) {
+            return "Câncer ♋";
+        } else if ((month == 7 && day >= 23) || (month == 8 && day <= 23)) {
+            return "Leão ♌";
+        } else if ((month == 8 && day >= 24) || (month == 9 && day <= 23)) {
+            return "Virgem ♍";
+        } else if ((month == 9 && day >= 24) || (month == 10 && day <= 23)) {
+            return "Libra ♎";
+        } else if ((month == 10 && day >= 24) || (month == 11 && day <= 22)) {
+            return "Escorpião ♏";
+        } else if ((month == 11 && day >= 23) || (month == 12 && day <= 21)) {
+            return "Sagitário ♐";
+        }
+    }
+    isPossibleClient() {
+        const age = this.age;
+        console.log("Passou pelo isPossibleClient? da class User");
+        if (age >= 18 && age <= 26) {
+            return "Sim ✅";
+        }
+        return "Não ❌";
+    }
+
 }
 
-//create function createUser
+class AllUsers {
+    constructor() {
+        this.users = [];
+        console.log("Passou pelo constructor da class AllUsers");
+
+    }
+
+    add(user) {
+        console.log("Passou pelo add() da class AllUsers");
+
+        if (isAnyInputEmpty()) {
+            sendErrorMsg("Preencha todos os campos");
+        } else if (!valida_cpf(user.cpf)) {
+            sendErrorMsg("CPF inválido");
+        } else if (isAlreadyRegistered(user.cpf)) {
+            sendErrorMsg("CPF já cadastrado");
+        } else {
+            this.users.push(user);
+            successMsg("Parabéns, você entrou na lista de espera!");
+            clearInputs();
+        }
+    }
+
+    getAll() {
+        console.log("Passou pelo getAll() da class AllUsers");
+
+        return this.users;
+    }
+
+    countNumber() {
+        console.log("Passou pelo countNumber() da class AllUsers");
+
+        return this.users.length;
+    }
+
+}
+
+// Instances
+const allUsers = new AllUsers();
+console.log("Instanciou a class AllUsers");
+
+
+// Actions functions.
+
 function createUser() {
-   const nameInput =     document.getElementById("nameInput").value;
-   const emailInput =    document.getElementById("emailInput").value;
-   const birthdateInput  document.getElementById("birthdateInput").value;
-   const addressInput =  document.getElementById("addressInput").value;
-   const phoneInput =    document.getElementById("phoneInput").value;
-   const cpfInputf =     document.getElementById("cpfInput").value;
-    
+    console.log("Passou pela funcao createUser()");
 
-    const user = new user (nameInput,emailInput,birthdateInput,addressInput,phoneInput,cpfInputf);
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let birthdate = document.getElementById("birthdate").value;
+    let address = document.getElementById("address").value;
+    let phone = document.getElementById("phone").value;
+    let cpf = document.getElementById("cpf").value;
 
-    const list = new list;
-    
-    ListUsers.add(user);
-    
-    exibirusers();
+    let user = new User(name, email, birthdate, address, phone, cpf);
+    allUsers.add(user);
+
 }
 
-// function isAnyInputEmpty
-function isAnyInputEmpty () {
-    const user = [];
-    user.length;
+function clearInputs() {
+    console.log("Passou pela funcao clearInputs()");
+    
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("birthdate").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("cpf").value = "";
+    
 }
 
-//function valida cpf
+function showRegister() {
+    document.getElementById("sub-div").classList.add("hidden");
+    document.getElementById("title-page").classList.remove("hidden");
+    document.getElementById("main-div").classList.remove("hidden");
+    console.log("Passou pela funcao showRegister()");
+
+}
+
+function dateinPTBR(date) {
+    console.log("Passou pela funcao dateinPTBR()");
+
+    let dateArray = date.split("-");
+    let datePTBR = dateArray[2] + "/" + dateArray[1] + "/" + dateArray[0];
+    return datePTBR;
+}
+
+function formatedCPF(cpf) {
+    console.log("Passou pela funcao formatedCPF()");
+
+    let cpfArray = cpf.split("");
+    let cpfFormated = cpfArray[0] + cpfArray[1] + cpfArray[2]
+        + "." + cpfArray[3] + cpfArray[4] + cpfArray[5] + "."
+        + cpfArray[6] + cpfArray[7] + cpfArray[8] + "-" + cpfArray[9] + cpfArray[10];
+    return cpfFormated;
+}
+
+function formatedCellphone(cellphone) {
+    console.log("Passou pela funcao formatedCellphone()");
+
+    let cellphoneArray = cellphone.split("");
+    let cellphoneFormated = "(" + cellphoneArray[0] + cellphoneArray[1] + ")"
+        + " " + cellphoneArray[2] + cellphoneArray[3] + cellphoneArray[4]
+        + cellphoneArray[5] + cellphoneArray[6] + "-"
+        + cellphoneArray[7] + cellphoneArray[8]
+        + cellphoneArray[9] + cellphoneArray[10];
+    return cellphoneFormated;
+}
+
 function valida_cpf(cpf) {
     console.log("Passou pela funcao valida_cpf()");
 
@@ -73,44 +213,73 @@ function valida_cpf(cpf) {
         return false;
 }
 
-//reorganize date 
-function reorganizeDate (){
-  
+function isAlreadyRegistered(cpf) {
+    console.log("Passou pela funcao isAlreadyRegistered()");
+
+    let users = allUsers.getAll();
+    let isRegistered = false;
+    users.forEach((user) => {
+        if (user.cpf == cpf) {
+            isRegistered = true;
+        }
+    });
+    return isRegistered;
 }
 
-function calculateAge(date) {
-    const date = new date();
-   
-    const birthdate = new
+function showUsers() {
+    console.log("Passou pela funcao showUsers()");
 
-    Date (dateString);
-    let age = today.getFullYear();
+    if (allUsers.getAll().length == 0) {
+        sendErrorMsg("Não há usuários cadastrados");
+        return;
+    } else {
+        document.getElementById("sub-div").classList.remove("hidden");
+        document.getElementById("title-page").classList.add("hidden");
+        document.getElementById("main-div").classList.add("hidden");
 
-    const year = today.getFullYear();
+        console.log(allUsers.getAll());
 
-    if (year < 18 || (year === 18 && today.getFullYear() < birthdate.getFullYear())) {
-        age--;
-    } 
-    return age;
+        const users = allUsers.getAll();
+
+        let html = "";
+        users.forEach((user) => {
+            html += `
+            <div class="list-eachUser">
+                <p><strong>Nome:</strong> ${user.name}</p>
+                <p><strong>Idade:</strong> ${user.age}</p>
+                <p><strong>Signo:</strong> ${user.zodiacSign}</p>
+                <p><strong>Email:</strong> ${user.email}</p>
+                <p><strong>Data de nascimento:</strong> ${dateinPTBR(user.birthdate)}</p>
+                <p><strong>Cidade:</strong> ${user.address}</p>
+                <p><strong>Telefone:</strong> ${formatedCellphone(user.phone)}</p>
+                <p><strong>CPF:</strong> ${formatedCPF(user.cpf)}</p>
+                <p><strong>Possivel cliente?</strong> ${user.possibleClient}</p>
+            </div>
+           `;
+        });
+        document.getElementById("user-list").innerHTML = html;
+    }
+    const contador = allUsers.countNumber()
+    document.getElementById("contador").innerHTML = `Total: ${contador}`;
 }
 
-//function registered cpf
-function isCPFcadastrado() {
-     Boolean validacpf == true
+function isAnyInputEmpty() {
+    console.log("Passou pela funcao isAnyInputEmpty()");
+
+    let name = document.getElementById("name").value;
+    let email = document.getElementById("email").value;
+    let birthdate = document.getElementById("birthdate").value;
+    let address = document.getElementById("address").value;
+    let phone = document.getElementById("phone").value;
+    let cpf = document.getElementById("cpf").value;
+
+    if (name == "" || email == "" || birthdate == "" || address == "" || phone == "" || cpf == "") {
+        return true;
+    } else {
+        return false;
+    }
 }
 
-//function mensage sucess
-function sendSuccessMsg(msg) {
-    console.log("Passou pela funcao sendSuccessMsg()");
-
-    document.getElementById("success-msg").innerHTML = msg;
-    document.getElementById("success-msg").classList.remove("hidden");
-    setTimeout(function () {
-        document.getElementById("success-msg").classList.add("hidden");
-    }, 4000);
-}
-
-//function mensage error
 function sendErrorMsg(msg) {
     console.log("Passou pela funcao sendErrorMsg()");
 
@@ -121,44 +290,25 @@ function sendErrorMsg(msg) {
     }, 4000);
 }
 
-//function clear inputs
- function clearInputs() {
-    cleanInput();
- }
-
-//add user list
-class ListUsers {
-    constructor(){
-        this.user = [];
-    }
-        add (user) {
-        if (isAnyInputEmpty() == true) {
-             sendErrorMsg ("Todos os campos obrigatórios devem ser preenchidos.");
-        } else if (!validaCPF (user.cpf)){
-            sendErrorMsg("CPF inválido.");
-        } else if (isCPFcadastrado(user.cpf)){
-            sendErrorMsg ("CPF já cadastrado no sistema.");
-        } else {
-            (user).push;
-            sendSuccessMsg ("Parabéns, você entrou na lista de espera!");
-            cleanInput();
-        }
-    }
+function successMsg(msg) {
+    console.log("Passou pela funcao successMsg()");
+    document.getElementById("success-msg").innerHTML = msg;
+    document.getElementById("success-msg").classList.remove("hidden");
+    setTimeout(function () {
+        document.getElementById("success-msg").classList.add("hidden");
+    }, 4000);
 }
 
-function moreinfos () {
- class possClient {
-        if ((calculateAge) => 18 && => 31) {
-            this.calculateAge = calculateAge;
-            sendSuccessMsg ("Possível Cliente");
-        } else  {
-            sendErrorMsg ("Não Cliente");
-        }
-    }
-};
+function clearInputs(){
+    console.log("Passou pela funcao clearInputs()");
 
+    document.getElementById("name").value = "";
+    document.getElementById("email").value = "";
+    document.getElementById("birthdate").value = "";
+    document.getElementById("address").value = "";
+    document.getElementById("phone").value = "";
+    document.getElementById("cpf").value = "";
+}
 
-    
-    
-
-
+// how many functions are there? 12
+// how many classes are there? 2
